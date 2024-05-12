@@ -8,8 +8,8 @@
 [![codecov](https://codecov.io/gh/kunitsucom/webarena-go/branch/main/graph/badge.svg?token=4UML9FB7BX)](https://codecov.io/gh/kunitsucom/webarena-go)
 [![sourcegraph](https://sourcegraph.com/github.com/kunitsucom/webarena-go/-/badge.svg)](https://sourcegraph.com/github.com/kunitsucom/webarena-go)
 
-webarena-go is a Go client library for [WebARENA®](https://web.arena.ne.jp/) API.
+[`webarena-go`](https://github.com/kunitsucom/webarena-go) is a Go client library for [WebARENA®](https://web.arena.ne.jp/) API.
 
-## Documents
+## Links
 
 - [WebARENA® API Document](https://indigo.arena.ne.jp/userapi/)
