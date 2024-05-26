@@ -69,15 +69,24 @@ func ClientOptionWithDebugLog(debugLog *log.Logger) ClientOption { //nolint:iret
 	return &debugLogOption{debugLog: debugLog}
 }
 
-type clientSecretOption struct{ clientID, clientSecret string }
+type clientIDOption struct{ clientID string }
+
+func (o *clientIDOption) apply(c *Client) {
+	c.clientID = o.clientID
+}
+
+func ClientOptionWithClientID(clientID string) ClientOption { //nolint:ireturn
+	return &clientIDOption{clientID: clientID}
+}
+
+type clientSecretOption struct{ clientSecret string }
 
 func (o *clientSecretOption) apply(c *Client) {
-	c.clientID = o.clientID
 	c.clientSecret = o.clientSecret
 }
 
-func ClientOptionWithClientSecret(clientID, clientSecret string) ClientOption { //nolint:ireturn
-	return &clientSecretOption{clientID: clientID, clientSecret: clientSecret}
+func ClientOptionWithClientSecret(clientSecret string) ClientOption { //nolint:ireturn
+	return &clientSecretOption{clientSecret: clientSecret}
 }
 
 type httpClientOption struct{ httpClient *http.Client }
