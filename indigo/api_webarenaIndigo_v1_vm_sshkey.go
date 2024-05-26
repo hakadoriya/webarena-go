@@ -255,7 +255,7 @@ type RetrieveWebArenaIndigoV1VmSSHKeyResponse struct {
 //	    "success": true,
 //	    "message": "SSH key has been updated successfully"
 //	}
-func (c *Client) UpdateWebArenaIndigoV1VmSSHKey(ctx context.Context, id int, req *UpdateWebArenaIndigoV1VmSSHKeyRequest) (*UpdateWebArenaIndigoV1VmSSHKeyResponse, error) {
+func (c *Client) UpdateWebArenaIndigoV1VmSSHKey(ctx context.Context, id int64, req *UpdateWebArenaIndigoV1VmSSHKeyRequest) (*UpdateWebArenaIndigoV1VmSSHKeyResponse, error) {
 	ctx, span := start(ctx)
 	defer span.End()
 
@@ -264,7 +264,7 @@ func (c *Client) UpdateWebArenaIndigoV1VmSSHKey(ctx context.Context, id int, req
 		return nil, errorz.Errorf("json.Marshal: %w", err)
 	}
 
-	httpReq, err := c.newRequest(ctx, http.MethodPut, path.Join(PathWebArenaIndigoV1VmSSHKey, strconv.Itoa(id)), body) // NOTE: PUT
+	httpReq, err := c.newRequest(ctx, http.MethodPut, path.Join(PathWebArenaIndigoV1VmSSHKey, strconv.FormatInt(id, 10)), body) //nolint:staticcheck // NOTE: PUT
 	if err != nil {
 		return nil, errorz.Errorf("c.newRequest: %w", err)
 	}
