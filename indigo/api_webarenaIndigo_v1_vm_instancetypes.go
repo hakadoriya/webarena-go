@@ -9,7 +9,7 @@ import (
 )
 
 type WebArenaIndigoV1VmInstanceType struct {
-	ID          int    `json:"id"`
+	ID          int64  `json:"id"`
 	Name        string `json:"name"`
 	DisplayName string `json:"display_name"` //nolint:tagliatelle // JSON field name is defined by the API
 	CreatedAt   string `json:"created_at"`   //nolint:tagliatelle // JSON field name is defined by the API
@@ -71,6 +71,6 @@ func (c *Client) GetWebArenaIndigoV1VmInstanceTypes(ctx context.Context) (*GetWe
 
 type GetWebArenaIndigoV1VmInstanceTypesResponse struct {
 	Success       bool                             `json:"success"`
-	Total         int                              `json:"total"`
+	Total         int64                            `json:"total"`
 	InstanceTypes []WebArenaIndigoV1VmInstanceType `json:"instanceTypes"`
 }

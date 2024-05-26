@@ -79,14 +79,14 @@ func (c *Client) GetWebArenaIndigoV1VmSSHKey(ctx context.Context) (*WebArenaIndi
 
 type WebArenaIndigoV1VmSSHKeyResponse struct {
 	Success bool                       `json:"success"`
-	Total   int                        `json:"total"`
+	Total   int64                      `json:"total"`
 	Sshkeys []WebArenaIndigoV1VmSSHKey `json:"sshkeys"`
 }
 
 type WebArenaIndigoV1VmSSHKey struct {
-	Id        int    `json:"id"`         //nolint:revive,stylecheck
+	Id        int64  `json:"id"`         //nolint:revive,stylecheck
 	ServiceId string `json:"service_id"` //nolint:revive,stylecheck,tagliatelle
-	UserId    int    `json:"user_id"`    //nolint:revive,stylecheck
+	UserId    int64  `json:"user_id"`    //nolint:revive,stylecheck
 	Name      string `json:"name"`
 	Sshkey    string `json:"sshkey"`
 	Status    string `json:"status"`

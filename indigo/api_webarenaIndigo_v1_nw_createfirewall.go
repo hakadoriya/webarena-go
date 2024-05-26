@@ -90,5 +90,5 @@ type PostWebArenaIndigoV1NwCreateFirewallResponse struct {
 	Success     bool   `json:"success"`
 	Message     string `json:"message"`
 	SuccessCode string `json:"sucessCode"`
-	FirewallID  int    `json:"firewallId"`
+	FirewallID  int64  `json:"firewallId"`
 }

@@ -12,7 +12,7 @@ import (
 )
 
 type WebArenaIndigoV1NwGetTemplateFirewall struct {
-	ID        int    `json:"id"`
+	ID        int64  `json:"id"`
 	Name      string `json:"name"`
 	Direction string `json:"direction"`
 	Type      string `json:"type"`

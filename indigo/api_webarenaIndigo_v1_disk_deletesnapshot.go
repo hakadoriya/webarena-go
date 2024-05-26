@@ -51,5 +51,5 @@ func (c *Client) DeleteWebArenaIndigoV1DiskDeleteSnapshot(ctx context.Context, s
 }
 
 type DeleteWebArenaIndigoV1DiskDeleteSnapshotResponse struct {
-	STATUS int `json:"STATUS"` //nolint:tagliatelle // JSON field name is defined by the API
+	STATUS int64 `json:"STATUS"` //nolint:tagliatelle // JSON field name is defined by the API
 }

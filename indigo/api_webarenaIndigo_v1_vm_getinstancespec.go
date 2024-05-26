@@ -12,11 +12,11 @@ import (
 )
 
 type WebArenaIndigoV1VmInstanceSpec struct {
-	ID              int                            `json:"id"`
+	ID              int64                          `json:"id"`
 	Name            string                         `json:"name"`
 	Description     string                         `json:"description"`
 	UsePossibleDate string                         `json:"use_possible_date"` //nolint:tagliatelle // JSON field name is defined by the API
-	InstanceTypeID  int                            `json:"instancetype_id"`   //nolint:tagliatelle // JSON field name is defined by the API
+	InstanceTypeID  int64                          `json:"instancetype_id"`   //nolint:tagliatelle // JSON field name is defined by the API
 	CreatedAt       string                         `json:"created_at"`        //nolint:tagliatelle // JSON field name is defined by the API
 	UpdatedAt       string                         `json:"updated_at"`        //nolint:tagliatelle // JSON field name is defined by the API
 	InstanceType    WebArenaIndigoV1VmInstanceType `json:"instance_type"`     //nolint:tagliatelle // JSON field name is defined by the API
@@ -90,6 +90,6 @@ func (c *Client) GetWebArenaIndigoV1VmInstanceSpec(ctx context.Context, instance
 
 type GetWebArenaIndigoV1VmInstanceSpecResponse struct {
 	Success  bool                             `json:"success"`
-	Total    int                              `json:"total"`
+	Total    int64                            `json:"total"`
 	SpecList []WebArenaIndigoV1VmInstanceSpec `json:"speclist"`
 }

@@ -62,5 +62,5 @@ type PostWebArenaIndigoV1DiskRetakeSnapshotRequest struct {
 }
 
 type PostWebArenaIndigoV1DiskRetakeSnapshotResponse struct {
-	Status int `json:"STATUS"` //nolint:tagliatelle // JSON field name is defined by the API
+	Status int64 `json:"STATUS"` //nolint:tagliatelle // JSON field name is defined by the API
 }

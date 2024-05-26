@@ -9,11 +9,11 @@ import (
 )
 
 type WebArenaIndigoV1NwFirewall struct {
-	ID        int    `json:"id"`
+	ID        int64  `json:"id"`
 	ServiceID string `json:"service_id"` //nolint:tagliatelle // JSON field name is defined by the API
-	UserID    int    `json:"user_id"`    //nolint:tagliatelle // JSON field name is defined by the API
+	UserID    int64  `json:"user_id"`    //nolint:tagliatelle // JSON field name is defined by the API
 	Name      string `json:"name"`
-	Status    int    `json:"status"`
+	Status    int64  `json:"status"`
 	CreatedAt string `json:"created_at"` //nolint:tagliatelle // JSON field name is defined by the API
 	UpdatedAt string `json:"updated_at"` //nolint:tagliatelle // JSON field name is defined by the API
 }

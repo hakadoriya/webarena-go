@@ -11,7 +11,7 @@ import (
 )
 
 type WebArenaIndigoV1AuthAPIKey struct {
-	ID        int    `json:"id"`
+	ID        int64  `json:"id"`
 	APIKey    string `json:"apiKey"`
 	CreatedAt string `json:"created_at"` //nolint:tagliatelle // JSON field name is defined by the API
 }
@@ -69,7 +69,7 @@ func (c *Client) GetWebArenaIndigoV1AuthAPIKey(ctx context.Context) (*GetWebAren
 
 type GetWebArenaIndigoV1AuthAPIKeyResponse struct {
 	Success      bool                         `json:"success"`
-	Total        int                          `json:"total"`
+	Total        int64                        `json:"total"`
 	AccessTokens []WebArenaIndigoV1AuthAPIKey `json:"accesstokens"`
 }
 
