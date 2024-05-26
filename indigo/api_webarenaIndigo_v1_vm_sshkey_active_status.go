@@ -10,7 +10,7 @@ import (
 
 type WebArenaIndigoV1VmSSHKeyActiveStatusResponse struct {
 	Success bool                       `json:"success"`
-	Total   int                        `json:"total"`
+	Total   int64                      `json:"total"`
 	Sshkeys []WebArenaIndigoV1VmSSHKey `json:"sshkeys"`
 }
 

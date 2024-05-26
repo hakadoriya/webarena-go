@@ -10,37 +10,37 @@ import (
 
 type WebArenaIndigoV1VmInstanceDate struct {
 	Date         string `json:"date"`
-	TimezoneType int    `json:"timezone_type"` //nolint:tagliatelle // JSON field name is defined by the API
+	TimezoneType int64  `json:"timezone_type"` //nolint:tagliatelle // JSON field name is defined by the API
 	Timezone     string `json:"timezone"`
 }
 
 type WebArenaIndigoV1VmInstance struct {
-	ID               int                            `json:"id"`
+	ID               int64                          `json:"id"`
 	InstanceName     string                         `json:"instance_name"` //nolint:tagliatelle // JSON field name is defined by the API
-	SetNo            int                            `json:"set_no"`        //nolint:tagliatelle // JSON field name is defined by the API
+	SetNo            int64                          `json:"set_no"`        //nolint:tagliatelle // JSON field name is defined by the API
 	VpsKind          string                         `json:"vps_kind"`      //nolint:tagliatelle // JSON field name is defined by the API
-	SequenceID       int                            `json:"sequence_id"`   //nolint:tagliatelle // JSON field name is defined by the API
-	UserID           int                            `json:"user_id"`       //nolint:tagliatelle // JSON field name is defined by the API
+	SequenceID       int64                          `json:"sequence_id"`   //nolint:tagliatelle // JSON field name is defined by the API
+	UserID           int64                          `json:"user_id"`       //nolint:tagliatelle // JSON field name is defined by the API
 	ServiceID        string                         `json:"service_id"`    //nolint:tagliatelle // JSON field name is defined by the API
 	Status           string                         `json:"status"`
-	SshKeyID         int                            `json:"sshkey_id"`  //nolint:revive,stylecheck,tagliatelle // JSON field name is defined by the API
+	SshKeyID         int64                          `json:"sshkey_id"`  //nolint:revive,stylecheck,tagliatelle // JSON field name is defined by the API
 	StartDate        WebArenaIndigoV1VmInstanceDate `json:"start_date"` //nolint:tagliatelle // JSON field name is defined by the API
-	HostID           int                            `json:"host_id"`    //nolint:tagliatelle // JSON field name is defined by the API
+	HostID           int64                          `json:"host_id"`    //nolint:tagliatelle // JSON field name is defined by the API
 	Plan             string                         `json:"plan"`
-	DiskPoint        int                            `json:"disk_point"` //nolint:tagliatelle // JSON field name is defined by the API
-	MemSize          int                            `json:"memsize"`
-	CPUs             int                            `json:"cpus"`
-	OsID             int                            `json:"os_id"` //nolint:tagliatelle // JSON field name is defined by the API
-	OtherStatus      int                            `json:"otherstatus"`
+	DiskPoint        int64                          `json:"disk_point"` //nolint:tagliatelle // JSON field name is defined by the API
+	MemSize          int64                          `json:"memsize"`
+	CPUs             int64                          `json:"cpus"`
+	OsID             int64                          `json:"os_id"` //nolint:tagliatelle // JSON field name is defined by the API
+	OtherStatus      int64                          `json:"otherstatus"`
 	UUID             string                         `json:"uuid"`
-	UIDGID           int                            `json:"uidgid"`
-	VncPort          int                            `json:"vnc_port"`   //nolint:tagliatelle // JSON field name is defined by the API
+	UIDGID           int64                          `json:"uidgid"`
+	VncPort          int64                          `json:"vnc_port"`   //nolint:tagliatelle // JSON field name is defined by the API
 	VncPasswd        string                         `json:"vnc_passwd"` //nolint:tagliatelle // JSON field name is defined by the API
 	ArpaName         string                         `json:"arpaname"`
 	ArpaDate         string                         `json:"arpadate"`
 	StatusChangeDate WebArenaIndigoV1VmInstanceDate `json:"status_change_date"` //nolint:tagliatelle // JSON field name is defined by the API
 	UpdatedAt        string                         `json:"updated_at"`         //nolint:tagliatelle // JSON field name is defined by the API
-	VMRevert         int                            `json:"vm_revert"`          //nolint:tagliatelle // JSON field name is defined by the API
+	VMRevert         int64                          `json:"vm_revert"`          //nolint:tagliatelle // JSON field name is defined by the API
 }
 
 // Instance Creation
@@ -137,10 +137,10 @@ func (c *Client) PostWebArenaIndigoV1VmCreateInstance(ctx context.Context, req *
 }
 
 type PostWebArenaIndigoV1VmCreateInstanceRequest struct {
-	SshKeyID     int    `json:"sshKeyId"` //nolint:revive,stylecheck
-	RegionID     int    `json:"regionId"`
-	OsID         int    `json:"osId"`
-	InstancePlan int    `json:"instancePlan"`
+	SshKeyID     int64  `json:"sshKeyId"` //nolint:revive,stylecheck
+	RegionID     int64  `json:"regionId"`
+	OsID         int64  `json:"osId"`
+	InstancePlan int64  `json:"instancePlan"`
 	InstanceName string `json:"instanceName"`
 }
 
@@ -245,9 +245,9 @@ func (c *Client) PostWebArenaIndigoV1VmCreateWindowsInstance(ctx context.Context
 
 type PostWebArenaIndigoV1VmCreateWindowsInstanceRequest struct {
 	WinPassword  string `json:"winPassword"`
-	RegionID     int    `json:"regionId"`
-	OsID         int    `json:"osId"`
-	InstancePlan int    `json:"instancePlan"`
+	RegionID     int64  `json:"regionId"`
+	OsID         int64  `json:"osId"`
+	InstancePlan int64  `json:"instancePlan"`
 	InstanceName string `json:"instanceName"`
 }
 
@@ -352,9 +352,9 @@ func (c *Client) PostWebArenaIndigoV1VmCreateImportURLInstance(ctx context.Conte
 
 type PostWebArenaIndigoV1VmCreateImportURLInstanceRequest struct {
 	ImportURL    string `json:"importUrl"`
-	RegionID     int    `json:"regionId"`
-	OsID         int    `json:"osId"`
-	InstancePlan int    `json:"instancePlan"`
+	RegionID     int64  `json:"regionId"`
+	OsID         int64  `json:"osId"`
+	InstancePlan int64  `json:"instancePlan"`
 	InstanceName string `json:"instanceName"`
 }
 
@@ -457,9 +457,9 @@ func (c *Client) PostWebArenaIndigoV1VmCreateSnapshotInstance(ctx context.Contex
 }
 
 type PostWebArenaIndigoV1VmCreateSnapshotInstanceRequest struct {
-	SshKeyID     int    `json:"sshKeyId"` //nolint:revive,stylecheck
+	SshKeyID     int64  `json:"sshKeyId"` //nolint:revive,stylecheck
 	SnapshotID   string `json:"snapshotId"`
-	InstancePlan int    `json:"instancePlan"`
+	InstancePlan int64  `json:"instancePlan"`
 	InstanceName string `json:"instanceName"`
 }
 

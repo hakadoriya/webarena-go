@@ -12,11 +12,11 @@ import (
 )
 
 type WebArenaIndigoV1VmOS struct {
-	ID             int    `json:"id"`
-	CategoryID     int    `json:"categoryid"`
+	ID             int64  `json:"id"`
+	CategoryID     int64  `json:"categoryid"`
 	Name           string `json:"name"`
 	ViewName       string `json:"viewname"`
-	InstanceTypeID int    `json:"instancetype_id"` //nolint:tagliatelle // JSON field name is defined by the API
+	InstanceTypeID int64  `json:"instancetype_id"` //nolint:tagliatelle // JSON field name is defined by the API
 }
 
 // Get OS list
@@ -84,6 +84,6 @@ func (c *Client) GetWebArenaIndigoV1VmOSList(ctx context.Context, instanceTypeID
 
 type GetWebArenaIndigoV1VmOsListResponse struct {
 	Success    bool                             `json:"success"`
-	Total      int                              `json:"total"`
+	Total      int64                            `json:"total"`
 	OsCategory []WebArenaIndigoV1VmInstanceSpec `json:"osCategory"`
 }

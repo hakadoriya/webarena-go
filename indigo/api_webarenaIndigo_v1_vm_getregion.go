@@ -12,7 +12,7 @@ import (
 )
 
 type WebArenaIndigoV1VmRegion struct {
-	ID              int    `json:"id"`
+	ID              int64  `json:"id"`
 	Name            string `json:"name"`
 	UsePossibleDate string `json:"use_possible_date"` //nolint:tagliatelle // JSON field name is defined by the API
 }
@@ -78,6 +78,6 @@ func (c *Client) GetWebArenaIndigoV1VmGetRegion(ctx context.Context, instanceTyp
 
 type GetWebArenaIndigoV1VmGetRegionResponse struct {
 	Success    bool                       `json:"success"`
-	Total      int                        `json:"total"`
+	Total      int64                      `json:"total"`
 	RegionList []WebArenaIndigoV1VmRegion `json:"regionlist"`
 }
