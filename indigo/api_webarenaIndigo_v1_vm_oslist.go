@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strconv"
 
-	errorz "github.com/kunitsucom/util.go/errors"
+	"github.com/hakadoriya/z.go/errorz"
 )
 
 type WebArenaIndigoV1VmOS struct {

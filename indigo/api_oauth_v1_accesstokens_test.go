@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	require "github.com/kunitsucom/util.go/testing/require"
+	"github.com/hakadoriya/z.go/testingz/requirez"
 )
 
 //nolint:tparallel,paralleltest
@@ -22,7 +22,7 @@ func TestClient_PostOAuthV1AccessTokens(t *testing.T) {
 			ClientSecret: client.clientSecret,
 			Code:         "",
 		})
-		require.NoError(t, err)
-		require.NotNil(t, resp)
+		requirez.NoError(t, err)
+		requirez.NotNil(t, resp)
 	})
 }

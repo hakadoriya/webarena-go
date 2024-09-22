@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	errorz "github.com/kunitsucom/util.go/errors"
+	"github.com/hakadoriya/z.go/errorz"
 )
 
 type PostOAuthV1AccessTokensRequest struct {
@@ -33,7 +33,7 @@ type PostOAuthV1AccessTokensResponse struct {
 //	  -H 'Content-Type: application/json' \
 //	  -d '{
 //	    "grantType": "client_credentials",
-//	    "clientId": "YNG2yIyLDA3TqODlEXvLRwL7HzBjDsCQ",
+//	    "clientId": "YNG2yiyLDA3TqODlEXvLRwL7HzBjDsCQ",
 //	    "clientSecret": "uDczeZJlxYvuzqcU",
 //	    "code": ""
 //	}'

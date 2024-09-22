@@ -3,7 +3,7 @@ package indigo
 import (
 	"context"
 
-	"github.com/kunitsucom/webarena-go/util"
+	"github.com/hakadoriya/webarena-go/util"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
 )

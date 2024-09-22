@@ -13,9 +13,9 @@ import (
 
 	"golang.org/x/time/rate"
 
-	"github.com/kunitsucom/util.go/env"
-	errorz "github.com/kunitsucom/util.go/errors"
-	"github.com/kunitsucom/util.go/retry"
+	"github.com/hakadoriya/z.go/envz"
+	"github.com/hakadoriya/z.go/errorz"
+	"github.com/hakadoriya/z.go/retryz"
 )
 
 type (
@@ -52,7 +52,7 @@ type (
 		//
 		//	{"errorCode": "429", "errorMessage": "Too Many Request.", "developerMessage": "Rate limit quota violation. Quota limit  exceeded. Identifier : ffffffff-ffff-4fff-ffff-ffffffffffff", "moreInfo": null, "requestId": "ffffffff-ffff-ffff-ffff-fffffffffffffffffff"}
 		rateLimiter *rate.Limiter
-		retryConfig *retry.Config
+		retryConfig *retryz.Config
 		accessToken *AccessToken
 	}
 
@@ -131,11 +131,11 @@ func NewClient(ctx context.Context, opts ...ClientOption) (*Client, error) {
 	c := &Client{
 		debugLog:     log.New(io.Discard, "", log.LstdFlags),
 		httpClient:   http.DefaultClient,
-		endpoint:     env.StringOrDefault(WEBARENA_INDIGO_ENDPOINT, "https://api.customer.jp"),
+		endpoint:     envz.StringOrDefault(WEBARENA_INDIGO_ENDPOINT, "https://api.customer.jp"),
 		clientID:     os.Getenv(WEBARENA_INDIGO_CLIENT_ID),
 		clientSecret: os.Getenv(WEBARENA_INDIGO_CLIENT_SECRET),
 		rateLimiter:  rate.NewLimiter(rate.Every(defaultRateLimitInterval), defaultRateLimitBurst),
-		retryConfig:  retry.NewConfig(defaultInitialRetryInterval, defaultMaxRetryInterval),
+		retryConfig:  retryz.NewConfig(defaultInitialRetryInterval, defaultMaxRetryInterval),
 	}
 
 	for _, opt := range opts {
@@ -272,8 +272,8 @@ func (c *Client) doRequestWithoutAccessToken(req *http.Request) (*http.Response,
 		return nil
 	}
 
-	retryer := retry.New(req.Context(), c.retryConfig)
-	if err := retryer.Do(f, retry.WithRetryableErrors(ErrAPIReturnsTooManyRequest)); err != nil {
+	retryer := retryz.New(req.Context(), c.retryConfig)
+	if err := retryer.Do(f, retryz.WithRetryableErrors(ErrAPIReturnsTooManyRequest)); err != nil {
 		return nil, errorz.Errorf("(*retry.Retryer) Do: %w", err)
 	}
 

@@ -7,7 +7,7 @@ import (
 	"path"
 	"strconv"
 
-	errorz "github.com/kunitsucom/util.go/errors"
+	"github.com/hakadoriya/z.go/errorz"
 )
 
 // SSH Key List
