@@ -65,6 +65,37 @@ test: githooks ## Run go test and display coverage
 .PHONY: ci
 ci: lint test ## CI command set
 
+.PHONY: up
+up:  ## Run docker compose up --wait -d
+	# Run in background (If failed to start, output logs and exit abnormally)
+	#if ! docker compose up --wait -d; then docker compose logs; exit 1; fi
+
+.PHONY: ps
+ps:  ## Run docker compose ps
+	#docker compose ps
+
+.PHONY: down
+down:  ## Run docker compose down
+	#docker compose down
+
+.PHONY: reset
+reset:  ## Run docker compose down and Remove volumes
+	#docker compose down --volumes
+
+.PHONY: rmi
+rmi:  ## Run docker compose down and Remove all images, orphans
+	#docker compose down --rmi all --remove-orphans
+
+.PHONY: restart
+restart:  ## Restart docker compose
+	#-make down
+	#make up
+
+.PHONY: logs
+logs:  ## Tail docker compose logs
+	#@printf '[\033[36mNOTICE\033[0m] %s\n' "If want to go back prompt, enter Ctrl+C"
+	#docker compose logs -f
+
 .PHONY: release
 release:  ## git tag per go modules for release
 	${REPO_ROOT}/.bin/git-tag-go-mod.sh

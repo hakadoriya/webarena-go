@@ -1,0 +1,12 @@
+[files]
+extend-exclude = [
+  ".tmp",
+  ".typos.toml",
+  "go.mod",
+  "go.sum",
+]
+
+[default.extend-words]
+# If you have a false positive, add the word to the dictionary as follows:
+# NotTypoWord = "NotTypoWord"
+sucess = "sucess" # typo by WebARENA service

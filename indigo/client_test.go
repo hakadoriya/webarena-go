@@ -7,10 +7,9 @@ import (
 	"os"
 	"testing"
 
-	errorz "github.com/kunitsucom/util.go/errors"
-	syncz "github.com/kunitsucom/util.go/sync"
-
-	require "github.com/kunitsucom/util.go/testing/require"
+	"github.com/hakadoriya/z.go/errorz"
+	"github.com/hakadoriya/z.go/syncz"
+	"github.com/hakadoriya/z.go/testingz/requirez"
 )
 
 var (
@@ -46,7 +45,7 @@ func TestClient_refreshAccessToken(t *testing.T) {
 
 		client := NewTestClient(ctx, t)
 		accessToken, err := client.IssueAccessToken(ctx)
-		require.NoError(t, err)
-		require.NotNil(t, accessToken)
+		requirez.NoError(t, err)
+		requirez.NotNil(t, accessToken)
 	})
 }

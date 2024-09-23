@@ -5,7 +5,7 @@ import (
 	"math"
 	"testing"
 
-	require "github.com/kunitsucom/util.go/testing/require"
+	"github.com/hakadoriya/z.go/testingz/requirez"
 )
 
 func TestClient_GetWebArenaIndigoV1DiskSnapshotList(t *testing.T) {
@@ -18,7 +18,7 @@ func TestClient_GetWebArenaIndigoV1DiskSnapshotList(t *testing.T) {
 		client := NewTestClient(ctx, t)
 
 		resp, err := client.GetWebArenaIndigoV1DiskSnapshotList(ctx, math.MaxInt)
-		require.ErrorIs(t, err, ErrUnexpectedStatusCode)
-		require.Nil(t, resp)
+		requirez.ErrorIs(t, err, ErrUnexpectedStatusCode)
+		requirez.Nil(t, resp)
 	})
 }

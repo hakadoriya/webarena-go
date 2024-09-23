@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	require "github.com/kunitsucom/util.go/testing/require"
+	"github.com/hakadoriya/z.go/testingz/requirez"
 )
 
 func TestClient_GetWebArenaIndigoV1VmInstanceSpec(t *testing.T) {
@@ -17,7 +17,7 @@ func TestClient_GetWebArenaIndigoV1VmInstanceSpec(t *testing.T) {
 		client := NewTestClient(ctx, t)
 
 		resp, err := client.GetWebArenaIndigoV1VmInstanceSpec(ctx, 1, 1)
-		require.NoError(t, err)
-		require.NotNil(t, resp)
+		requirez.NoError(t, err)
+		requirez.NotNil(t, resp)
 	})
 }

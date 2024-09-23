@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	errorz "github.com/kunitsucom/util.go/errors"
+	"github.com/hakadoriya/z.go/errorz"
 )
 
 type WebArenaIndigoV1VmSSHKeyActiveStatusResponse struct {

@@ -1,5 +1,4 @@
-# ref. https://zenn.dev/snowcait/articles/d6bc5eafd8ab75
-name: 'Auto Assign'
+name: auto-assign
 
 on:
   pull_request:
@@ -9,7 +8,7 @@ on:
       - reopened
 
 jobs:
-  assign:
+  auto-assign:
     name: Auto Assign
     if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest

@@ -7,32 +7,10 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '.github/dependabot.yml'
-      - '.github/pull_request_template.md'
-      - '.github/release.yml'
-      - '.github/workflows/label-checker.yml'
-      - '.github/workflows/task-list-checker.yml'
-      - '**.md'
-      - '.gitignore'
-      - '.gitattributes'
+    # NO paths filter
   pull_request:
-    paths-ignore:
-      - '.github/dependabot.yml'
-      - '.github/pull_request_template.md'
-      - '.github/release.yml'
-      - '.github/workflows/label-checker.yml'
-      - '.github/workflows/task-list-checker.yml'
-      - '**.md'
-      - '.gitignore'
-      - '.gitattributes'
-  merge_group:
-    branches:
-      - main
-    types:
-      - checks_requested
+    # NO paths filter
   workflow_dispatch:
-    inputs: {}
 
 # NOTE: If commit & push continuously, cancel the workflow other than the latest commit.
 concurrency:
@@ -51,9 +29,27 @@ defaults:
     shell: bash
 
 jobs:
-  go-lint: # NOTE: for Branch protection rule `Status checks that are required.`
-    name: Run golangci-lint
-    runs-on: ubuntu-latest # ref. https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.paths-filter.outputs.skip }}
+    steps:
+      - uses: hakadoriya/github-actions-paths-filter-alternative@main
+        id: paths-filter
+        with:
+          paths: |-
+            # If any of these regular expressions match, it returns skip=false
+            # This setting takes precedence over paths-ignore
+            ^.github/workflows/go-lint.yml$
+            ^.*go\.[a-z\.]+$
+            ^.*\.go$
+  # > Note: A job that is skipped will report its status as "Success".
+  # > It will not prevent a pull request from merging, even if it is a required check.
+  # ref. https://docs.github.com/en/actions/using-jobs/using-conditions-to-control-job-execution#overview
+  go-lint:
+    runs-on: ubuntu-latest
+    needs: paths-filter
+    if: ${{ needs.paths-filter.outputs.skip != 'true' }}
     steps:
       - uses: actions/checkout@v4
       - name: DEBUG
@@ -110,25 +106,13 @@ jobs:
         with:
           path: |
             ~/go/pkg/mod
-          # ${{ steps.golang-info.outputs.GOCACHE }}
+          # ${{ steps.golang-info.outputs.GOCACHE }} # NOTE: There are cases where build artifacts before modification are cached and cannot be resolved, so they are excluded from caching.
           key: ${{ runner.os }}-go-${{ steps.golang-info.outputs.GOVERSION }}-${{ hashFiles('**/go.sum') }}-${{ hashFiles('**/*.go') }}
           restore-keys: |
             ${{ runner.os }}-go-${{ steps.golang-info.outputs.GOVERSION }}-${{ hashFiles('**/go.sum') }}-
             ${{ runner.os }}-go-${{ steps.golang-info.outputs.GOVERSION }}-
             ${{ runner.os }}-go-
-      - name: Setup git config for go mod download
-        env:
-          DEBIAN_FRONTEND: noninteractive
-          # GITHUB_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
-        working-directory: ${{ env.WORKDIR }}
-        shell: bash
-        run: |
-          set -Eeu -o pipefail -x
-          direnv allow .
-          if [ -n "${GITHUB_TOKEN-}" ]; then
-            direnv exec . bash -Eeux -o pipefail -c 'echo "${GOPRIVATE:-}${GOPRIVATE+,}" | while read -d , -r LINE; do echo "set git config: ${LINE}"; git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@${LINE}".insteadOf "https://${LINE}"; done'
-          fi
-      - uses: golangci/golangci-lint-action@v6.0.1 # ref. https://github.com/golangci/golangci-lint-action#how-to-use
+      - uses: golangci/golangci-lint-action@v6.1.0 # ref. https://github.com/golangci/golangci-lint-action#how-to-use
         with:
           working-directory: ${{ env.WORKDIR }}
           args: --timeout=600s
