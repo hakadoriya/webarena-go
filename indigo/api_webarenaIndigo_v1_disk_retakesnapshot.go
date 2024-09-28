@@ -48,12 +48,12 @@ func (c *Client) PostWebArenaIndigoV1DiskRetakeSnapshot(ctx context.Context, req
 	}
 	defer httpResp.Body.Close()
 
-	resp := &PostWebArenaIndigoV1DiskRetakeSnapshotResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp PostWebArenaIndigoV1DiskRetakeSnapshotResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type PostWebArenaIndigoV1DiskRetakeSnapshotRequest struct {

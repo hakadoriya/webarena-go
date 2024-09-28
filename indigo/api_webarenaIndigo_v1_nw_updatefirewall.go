@@ -65,12 +65,12 @@ func (c *Client) UpdateWebArenaIndigoV1NwFirewall(ctx context.Context, req *Upda
 	}
 	defer httpResp.Body.Close()
 
-	resp := &UpdateWebArenaIndigoV1NwFirewallResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp UpdateWebArenaIndigoV1NwFirewallResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type UpdateWebArenaIndigoV1NwFirewallRequest struct {

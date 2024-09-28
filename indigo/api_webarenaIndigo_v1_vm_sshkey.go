@@ -69,12 +69,12 @@ func (c *Client) GetWebArenaIndigoV1VmSSHKey(ctx context.Context) (*WebArenaIndi
 	}
 	defer httpResp.Body.Close()
 
-	resp := &WebArenaIndigoV1VmSSHKeyResponse{}
+	var resp WebArenaIndigoV1VmSSHKeyResponse
 	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type WebArenaIndigoV1VmSSHKeyResponse struct {
@@ -150,12 +150,12 @@ func (c *Client) CreateWebArenaIndigoV1VmSSHKey(ctx context.Context, req *Create
 	}
 	defer httpResp.Body.Close()
 
-	resp := &CreateWebArenaIndigoV1VmSSHKeyResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp CreateWebArenaIndigoV1VmSSHKeyResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.NewDecoder.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type CreateWebArenaIndigoV1VmSSHKeyRequest struct {
@@ -216,12 +216,12 @@ func (c *Client) RetrieveWebArenaIndigoV1VmSSHKey(ctx context.Context, sshKeyID 
 	}
 	defer httpResp.Body.Close()
 
-	resp := &RetrieveWebArenaIndigoV1VmSSHKeyResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp RetrieveWebArenaIndigoV1VmSSHKeyResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type RetrieveWebArenaIndigoV1VmSSHKeyResponse struct {
@@ -276,12 +276,12 @@ func (c *Client) UpdateWebArenaIndigoV1VmSSHKey(ctx context.Context, id int64, r
 	}
 	defer httpResp.Body.Close()
 
-	resp := &UpdateWebArenaIndigoV1VmSSHKeyResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp UpdateWebArenaIndigoV1VmSSHKeyResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.NewDecoder.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type UpdateWebArenaIndigoV1VmSSHKeyRequest struct {
@@ -331,12 +331,12 @@ func (c *Client) DestroyWebArenaIndigoV1VmSSHKey(ctx context.Context, sshKeyID i
 	}
 	defer httpResp.Body.Close()
 
-	resp := &DestroyWebArenaIndigoV1VmSSHKeyResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp DestroyWebArenaIndigoV1VmSSHKeyResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type DestroyWebArenaIndigoV1VmSSHKeyResponse struct {

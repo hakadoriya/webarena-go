@@ -14,6 +14,36 @@ type WebArenaIndigoV1VmInstanceDate struct {
 	Timezone     string `json:"timezone"`
 }
 
+func (d WebArenaIndigoV1VmInstanceDate) UnmarshalJSON(b []byte) error {
+	type Alias WebArenaIndigoV1VmInstanceDate
+	aux := &struct {
+		*Alias
+	}{
+		Alias: (*Alias)(&d),
+	}
+	if err := json.Unmarshal(b, &aux); err == nil {
+		d = WebArenaIndigoV1VmInstanceDate(*aux.Alias)
+		return nil
+	}
+
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return errorz.Errorf("json.Unmarshal: %w", err)
+	}
+
+	d.Date = s
+	d.TimezoneType = 3
+	d.Timezone = "UTC"
+
+	return nil
+}
+
+type WebArenaIndigoV1VmInstanceOS struct {
+	ID       int64  `json:"id"`
+	Name     string `json:"name"` //nolint:tagliatelle // JSON field name is defined by the API
+	ViewName string `json:"viewname"`
+}
+
 type WebArenaIndigoV1VmInstance struct {
 	ID               int64                          `json:"id"`
 	InstanceName     string                         `json:"instance_name"` //nolint:tagliatelle // JSON field name is defined by the API
@@ -41,6 +71,9 @@ type WebArenaIndigoV1VmInstance struct {
 	StatusChangeDate WebArenaIndigoV1VmInstanceDate `json:"status_change_date"` //nolint:tagliatelle // JSON field name is defined by the API
 	UpdatedAt        string                         `json:"updated_at"`         //nolint:tagliatelle // JSON field name is defined by the API
 	VMRevert         int64                          `json:"vm_revert"`          //nolint:tagliatelle // JSON field name is defined by the API
+	VEID             string                         `json:"VEID"`               //nolint:tagliatelle // JSON field name is defined by the API
+	OS               WebArenaIndigoV1VmInstanceOS   `json:"os"`
+	IP               string                         `json:"ip"`
 }
 
 // Instance Creation
@@ -128,12 +161,12 @@ func (c *Client) PostWebArenaIndigoV1VmCreateInstance(ctx context.Context, req *
 	}
 	defer httpResp.Body.Close()
 
-	resp := &PostWebArenaIndigoV1VmCreateInstanceResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp PostWebArenaIndigoV1VmCreateInstanceResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type PostWebArenaIndigoV1VmCreateInstanceRequest struct {
@@ -235,12 +268,12 @@ func (c *Client) PostWebArenaIndigoV1VmCreateWindowsInstance(ctx context.Context
 	}
 	defer httpResp.Body.Close()
 
-	resp := &PostWebArenaIndigoV1VmCreateWindowsInstanceResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp PostWebArenaIndigoV1VmCreateWindowsInstanceResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type PostWebArenaIndigoV1VmCreateWindowsInstanceRequest struct {
@@ -342,12 +375,12 @@ func (c *Client) PostWebArenaIndigoV1VmCreateImportURLInstance(ctx context.Conte
 	}
 	defer httpResp.Body.Close()
 
-	resp := &PostWebArenaIndigoV1VmCreateImportURLInstanceResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp PostWebArenaIndigoV1VmCreateImportURLInstanceResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type PostWebArenaIndigoV1VmCreateImportURLInstanceRequest struct {
@@ -448,12 +481,12 @@ func (c *Client) PostWebArenaIndigoV1VmCreateSnapshotInstance(ctx context.Contex
 	}
 	defer httpResp.Body.Close()
 
-	resp := &PostWebArenaIndigoV1VmCreateSnapshotInstanceResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp PostWebArenaIndigoV1VmCreateSnapshotInstanceResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type PostWebArenaIndigoV1VmCreateSnapshotInstanceRequest struct {

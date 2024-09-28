@@ -97,7 +97,7 @@ import (
 //			"ip": "192.168.0.19"
 //		}
 //	]
-func (c *Client) GetWebArenaIndigoV1VmGetInstanceList(ctx context.Context) (*GetWebArenaIndigoV1VmGetInstanceListResponse, error) {
+func (c *Client) GetWebArenaIndigoV1VmGetInstanceList(ctx context.Context) (GetWebArenaIndigoV1VmGetInstanceListResponse, error) {
 	ctx, span := start(ctx)
 	defer span.End()
 
@@ -112,8 +112,8 @@ func (c *Client) GetWebArenaIndigoV1VmGetInstanceList(ctx context.Context) (*Get
 	}
 	defer httpResp.Body.Close()
 
-	resp := &GetWebArenaIndigoV1VmGetInstanceListResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp GetWebArenaIndigoV1VmGetInstanceListResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 

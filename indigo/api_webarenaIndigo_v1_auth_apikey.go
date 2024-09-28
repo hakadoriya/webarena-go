@@ -59,12 +59,12 @@ func (c *Client) GetWebArenaIndigoV1AuthAPIKey(ctx context.Context) (*GetWebAren
 	}
 	defer httpResp.Body.Close()
 
-	resp := &GetWebArenaIndigoV1AuthAPIKeyResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp GetWebArenaIndigoV1AuthAPIKeyResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type GetWebArenaIndigoV1AuthAPIKeyResponse struct {
@@ -109,12 +109,12 @@ func (c *Client) DeleteWebArenaIndigoV1AuthAPIKey(ctx context.Context, apiKeyID 
 	}
 	defer httpResp.Body.Close()
 
-	resp := &DeleteWebArenaIndigoV1AuthAPIKeyResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp DeleteWebArenaIndigoV1AuthAPIKeyResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type DeleteWebArenaIndigoV1AuthAPIKeyResponse struct {

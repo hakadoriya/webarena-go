@@ -74,10 +74,10 @@ func (c *Client) PostOAuthV1AccessTokens(ctx context.Context, req *PostOAuthV1Ac
 	}
 	defer httpResp.Body.Close()
 
-	resp := &PostOAuthV1AccessTokensResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp PostOAuthV1AccessTokensResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
