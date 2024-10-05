@@ -42,12 +42,12 @@ func (c *Client) DeleteWebArenaIndigoV1DiskDeleteSnapshot(ctx context.Context, s
 	}
 	defer httpResp.Body.Close()
 
-	resp := &DeleteWebArenaIndigoV1DiskDeleteSnapshotResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp DeleteWebArenaIndigoV1DiskDeleteSnapshotResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type DeleteWebArenaIndigoV1DiskDeleteSnapshotResponse struct {

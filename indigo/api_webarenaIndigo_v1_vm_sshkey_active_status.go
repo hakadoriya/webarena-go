@@ -73,10 +73,10 @@ func (c *Client) GetWebArenaIndigoV1VmSSHKeyActiveStatus(ctx context.Context) (*
 	}
 	defer httpResp.Body.Close()
 
-	resp := &WebArenaIndigoV1VmSSHKeyActiveStatusResponse{}
+	var resp WebArenaIndigoV1VmSSHKeyActiveStatusResponse
 	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }

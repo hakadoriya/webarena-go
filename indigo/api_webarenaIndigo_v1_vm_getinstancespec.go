@@ -80,12 +80,12 @@ func (c *Client) GetWebArenaIndigoV1VmInstanceSpec(ctx context.Context, instance
 	}
 	defer httpResp.Body.Close()
 
-	resp := &GetWebArenaIndigoV1VmInstanceSpecResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp GetWebArenaIndigoV1VmInstanceSpecResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type GetWebArenaIndigoV1VmInstanceSpecResponse struct {

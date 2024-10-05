@@ -44,12 +44,12 @@ func (c *Client) CreateWebArenaIndigoV1AuthCreateAPIKey(ctx context.Context) (*C
 	}
 	defer httpResp.Body.Close()
 
-	resp := &CreateWebArenaIndigoV1AuthCreateAPIKeyResponse{}
+	var resp CreateWebArenaIndigoV1AuthCreateAPIKeyResponse
 	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type CreateWebArenaIndigoV1AuthCreateAPIKeyResponse struct {

@@ -46,12 +46,12 @@ func (c *Client) DeleteWebArenaIndigoV1NwDeleteFirewall(ctx context.Context, fir
 	}
 	defer httpResp.Body.Close()
 
-	resp := &DeleteWebArenaIndigoV1NwDeleteFirewallResponse{}
-	if err := json.NewDecoder(httpResp.Body).Decode(resp); err != nil {
+	var resp DeleteWebArenaIndigoV1NwDeleteFirewallResponse
+	if err := json.NewDecoder(httpResp.Body).Decode(&resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type DeleteWebArenaIndigoV1NwDeleteFirewallResponse struct {

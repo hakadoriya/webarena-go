@@ -97,12 +97,12 @@ func (c *Client) GetWebArenaIndigoV1NwGetTemplate(ctx context.Context, firewallI
 		return nil, errorz.Errorf("io.ReadAll: %w", err)
 	}
 	b = append([]byte{'['}, append(b, ']')...)
-	resp := &GetWebArenaIndigoV1NwGetTemplateResponse{}
-	if err := json.Unmarshal(b, resp); err != nil {
+	var resp GetWebArenaIndigoV1NwGetTemplateResponse
+	if err := json.Unmarshal(b, &resp); err != nil {
 		return nil, errorz.Errorf("json.Decode: %w", err)
 	}
 
-	return resp, nil
+	return &resp, nil
 }
 
 type GetWebArenaIndigoV1NwGetTemplateResponse []WebArenaIndigoV1NwGetTemplateFirewall
