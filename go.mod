@@ -2,7 +2,7 @@ module github.com/hakadoriya/webarena-go
 
 go 1.22.3
 
-require golang.org/x/time v0.6.0
+require golang.org/x/time v0.7.0
 
 require github.com/hakadoriya/z.go v0.0.0-20240922214027-5c221e47f81a
 
